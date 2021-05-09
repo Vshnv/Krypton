@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version '7.0.0'
+    id "io.github.slimjar"
+}
+
+group 'org.kryptonmc'
+version '0.19.3'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+slimJar {
+    implementation()
+    isolate project(":krypton-server")
+}
