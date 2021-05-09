@@ -7,6 +7,7 @@ import org.kryptonmc.krypton.applyCommon
 import org.kryptonmc.krypton.applyRepositories
 import org.kryptonmc.krypton.log4j
 import org.kryptonmc.krypton.netty
+import io.github.slimjar.task.SlimJar
 
 plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -22,18 +23,18 @@ application.mainClass.set("org.kryptonmc.krypton.KryptonKt")
 dependencies {
     api(project(":krypton-api"))
 
-    implementation(kotlin("stdlib-jdk7"))
-    implementation(kotlin("stdlib-jdk8"))
+    slim(kotlin("stdlib-jdk7"))
+    slim(kotlin("stdlib-jdk8"))
 
     // Netty
-    api(netty("buffer"))
-    api(netty("handler"))
-    api(netty("transport"))
+    slim(netty("buffer"))
+    slim(netty("handler"))
+    slim(netty("transport"))
 
     // Netty native transport
-    implementation(netty("transport-native-epoll"))
-    implementation(netty("transport-native-kqueue"))
-    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.5.Final")
+    slim(netty("transport-native-epoll"))
+    slim(netty("transport-native-kqueue"))
+    slim("io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.5.Final")
 
     // Adventure
     api(adventure("text-serializer-gson"))
@@ -47,19 +48,19 @@ dependencies {
     runtimeOnly("org.jline:jline-terminal-jansi:3.19.0")
 
     // HTTP
-    api("com.squareup.retrofit2:retrofit:2.9.0")
-    api("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-    api("com.squareup.okhttp3:okhttp:${Versions.OKHTTP}")
+    slim("com.squareup.retrofit2:retrofit:2.9.0")
+    slim("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    slim("com.squareup.okhttp3:okhttp:${Versions.OKHTTP}")
 
     // Caching
-    api("com.github.ben-manes.caffeine:caffeine:3.0.1")
-    api("it.unimi.dsi:fastutil:8.5.4")
+    slim("com.github.ben-manes.caffeine:caffeine:3.0.1")
+    slim("it.unimi.dsi:fastutil:8.5.4")
 
     // CLI
-    implementation("com.github.ajalt.clikt:clikt:3.0.1")
+    slim("com.github.ajalt.clikt:clikt:3.0.1")
 
     // Metrics
-    implementation("org.bstats:bstats-base:2.2.0")
+    slim("org.bstats:bstats-base:2.2.0")
 }
 
 tasks {
@@ -107,4 +108,8 @@ license {
     header.set(project.rootProject.resources.text.fromFile("HEADER.txt"))
     newLine.set(false)
     exclude("**/*.properties", "**/*.conf", "**/*.json")
+}
+
+tasks.named<SlimJar>("slimJar") {
+    compileOnly()
 }

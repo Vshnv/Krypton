@@ -16,6 +16,7 @@ plugins {
     id("org.cadixdev.licenser") version "0.6.0" apply false
     `maven-publish`
     signing
+    id("io.github.slimjar") version "1.1.0"
 }
 
 allprojects {
@@ -36,23 +37,24 @@ subprojects {
     apply(plugin = "info.solidsoft.pitest")
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
+    apply(plugin = "io.github.slimjar")
 
     dependencies {
-        api(kotlin("stdlib"))
-        api("com.google.guava:guava:30.1.1-jre")
-        api("org.apache.commons:commons-lang3:3.12.0")
-        api("org.apache.commons:commons-text:1.9")
+        slim(kotlin("stdlib"))
+        slim("com.google.guava:guava:30.1.1-jre")
+        slim("org.apache.commons:commons-lang3:3.12.0")
+        slim("org.apache.commons:commons-text:1.9")
 
-        api(kotlinx("coroutines-core", Versions.COROUTINES))
-        api(kotlinx("serialization-json", Versions.SERIALIZATION))
-        api(kotlinx("serialization-hocon", Versions.SERIALIZATION))
+        slim(kotlinx("coroutines-core", Versions.COROUTINES))
+        slim(kotlinx("serialization-json", Versions.SERIALIZATION))
+        slim(kotlinx("serialization-hocon", Versions.SERIALIZATION))
 
-        api(adventure("api"))
-        api(adventure("extra-kotlin"))
+        slim(adventure("api"))
+        slim(adventure("extra-kotlin"))
 
-        api("com.mojang:brigadier:1.0.17")
+        slim("com.mojang:brigadier:1.0.17")
 
-        api(log4j("api"))
+        slim(log4j("api"))
 
         // Testing
         testImplementation(junit("jupiter", "api"))
