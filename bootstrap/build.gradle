@@ -18,3 +18,12 @@ slimJar {
     implementation()
     isolate project(":krypton-server")
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.kryptonmc.krypton.bootstrap.KryptonBootstrap'
+        )
+    }
+}
+
